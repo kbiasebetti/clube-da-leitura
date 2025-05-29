@@ -26,9 +26,7 @@ public abstract class RepositorioBase
             proximoId++;
         }
         else
-        {
             Console.WriteLine("ERRO: Repositório cheio, não foi possível inserir!");
-        }
     }
 
     public virtual void Editar(int idSelecionado, EntidadeBase entidadeAtualizada)
@@ -63,9 +61,7 @@ public abstract class RepositorioBase
         foreach (EntidadeBase entidade in registros)
         {
             if (entidade != null && entidade.id == idSelecionado)
-            {
                 return entidade;
-            }
         }
 
         return null;
@@ -76,9 +72,7 @@ public abstract class RepositorioBase
         foreach (EntidadeBase entidade in registros)
         {
             if (entidade != null)
-            {
                 return registros;
-            }
         }
 
         return null;
