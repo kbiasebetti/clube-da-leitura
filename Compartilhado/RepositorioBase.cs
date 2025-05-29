@@ -64,7 +64,7 @@ public abstract class RepositorioBase
         {
             if (entidade != null && entidade.id == idSelecionado)
             {
-                return entidade
+                return entidade;
             }
         }
 
