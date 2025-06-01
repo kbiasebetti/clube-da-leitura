@@ -1,4 +1,4 @@
-namespace ClubeDaLeitura.Compartilhado
+namespace ClubeDaLeitura.Compartilhado;
 
 public abstract class TelaBase
 {
@@ -27,7 +27,7 @@ public abstract class TelaBase
 
     public virtual void Editar()
     {
-        int idSelecionado
+        int idSelecionado;
 
         Console.Clear();
         MostrarCabecalho($"Editando {nomeEntidade}");
@@ -53,20 +53,20 @@ public abstract class TelaBase
 
     public virtual void Excluir()
     {
-        int idSelecionado
-        
-        Console.Clear()
-        MostrarCabecalho($"Excluindo {nomeEntidade}")
+        int idSelecionado;
 
-        VisualizarTodos(false)
+        Console.Clear();
+        MostrarCabecalho($"Excluindo {nomeEntidade}");
+
+        VisualizarTodos(false);
 
         while (true)
         {
             Console.Write($"\nDigite o ID do {nomeEntidade} que deseja excluir: ");
             string entrada = Console.ReadLine();
 
-            if (int.TryParse(entrada, out idSelecionado)) ;
-            break;
+            if (int.TryParse(entrada, out idSelecionado))
+                break;
 
             notificador.ApresentarMensagem("ID inválido, por favor digite um número inteiro.", TipoMensagem.Erro);
         }

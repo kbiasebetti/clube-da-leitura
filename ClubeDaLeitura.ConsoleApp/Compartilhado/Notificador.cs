@@ -1,4 +1,4 @@
-namespace ClubeDaLeitura.Compartilhado
+namespace ClubeDaLeitura.Compartilhado;
 
 public class Notificador
 {

@@ -1,17 +1,15 @@
-namespace ClubeDaLeitura.Compartilhado
+namespace ClubeDaLeitura.Compartilhado;
 
 public abstract class RepositorioBase
 {
     private EntidadeBase[] registros = new EntidadeBase[100];
-    private int proximoId;
+    private int proximoId = 1;
 
     public virtual void Inserir(EntidadeBase entidade)
     {
         int indiceParaInserir = -1;
 
-        entidade.id = proximoId;
-
-        for (int i = 0; i < registros.Length, i++)
+        for (int i = 0; i < registros.Length; i++)
         {
             if (registros[i] == null)
             {
@@ -20,10 +18,10 @@ public abstract class RepositorioBase
             }
         }
 
-        if (indiceParaInserir != indiceParaInserir)
+        if (indiceParaInserir != -1)
         {
+            entidade.id = proximoId++;
             registros[indiceParaInserir] = entidade;
-            proximoId++;
         }
         else
             Console.WriteLine("ERRO: Repositório cheio, não foi possível inserir!");
@@ -33,7 +31,7 @@ public abstract class RepositorioBase
     {
         for (int i = 0; i < registros.Length; i++)
         {
-            if (registros[i] != null && registros.id == idSelecionado)
+            if (registros[i] != null && registros[i].id == idSelecionado)
             {
                 entidadeAtualizada.id = idSelecionado;
                 registros[i] = entidadeAtualizada;
@@ -44,9 +42,9 @@ public abstract class RepositorioBase
 
     public virtual bool Excluir(int idSelecionado)
     {
-        for (int i = 0; registros.Lenght; i++)
+        for (int i = 0; i < registros.Length; i++)
         {
-            if (registros != null && registros.id = idSelecionado)
+            if (registros[i] != null && registros[i].id == idSelecionado)
             {
                 registros[i] = null;
                 return true;
@@ -67,14 +65,8 @@ public abstract class RepositorioBase
         return null;
     }
 
-    public virtual EntidadeBase SelecionarTodos()
+    public virtual EntidadeBase[] SelecionarTodos()
     {
-        foreach (EntidadeBase entidade in registros)
-        {
-            if (entidade != null)
-                return registros;
-        }
-
-        return null;
+        return registros;
     }
 }
