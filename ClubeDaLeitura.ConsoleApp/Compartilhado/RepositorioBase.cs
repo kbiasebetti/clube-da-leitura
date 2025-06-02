@@ -3,11 +3,13 @@ namespace ClubeDaLeitura.Compartilhado;
 public abstract class RepositorioBase
 {
     private EntidadeBase[] registros = new EntidadeBase[100];
-    private int proximoId = 1;
+    private int proximoId;
 
     public virtual void Inserir(EntidadeBase entidade)
     {
         int indiceParaInserir = -1;
+
+        entidade.id = proximoId;
 
         for (int i = 0; i < registros.Length; i++)
         {
@@ -20,11 +22,11 @@ public abstract class RepositorioBase
 
         if (indiceParaInserir != -1)
         {
-            entidade.id = proximoId++;
             registros[indiceParaInserir] = entidade;
+            proximoId++;
         }
         else
-            Console.WriteLine("ERRO: Repositório cheio, não foi possível inserir!");
+            Console.WriteLine("Repositório cheio, não foi possível inserir!");
     }
 
     public virtual void Editar(int idSelecionado, EntidadeBase entidadeAtualizada)

@@ -2,9 +2,9 @@ namespace ClubeDaLeitura.Compartilhado;
 
 public abstract class TelaBase
 {
-    private string nomeEntidade;
-    private RepositorioBase repositorio;
-    private Notificador notificador;
+    protected string nomeEntidade;
+    protected RepositorioBase repositorio;
+    protected Notificador notificador;
 
     public TelaBase(string nomeEntidade, RepositorioBase repositorio, Notificador notificador)
     {
@@ -106,8 +106,9 @@ public abstract class TelaBase
 
     private void MostrarCabecalho(string titulo)
     {
-        Console.WriteLine(titulo);
-        Console.WriteLine(new string('-', titulo.Length));
+        Console.WriteLine("-------------------------");
+        Console.WriteLine($"{titulo}");
+        Console.WriteLine("-------------------------");
         Console.WriteLine();
     }
 
