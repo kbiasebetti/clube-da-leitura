@@ -104,7 +104,7 @@ public abstract class TelaBase
             notificador.ApresentarMensagem($"Nenhum {nomeEntidade} encontrado.", TipoMensagem.Erro);
     }
 
-    private void MostrarCabecalho(string titulo)
+    public void MostrarCabecalho(string titulo)
     {
         Console.WriteLine("-------------------------");
         Console.WriteLine($"{titulo}");

@@ -46,6 +46,6 @@ public class Amigo : EntidadeBase
 
     public override string DadosFormatados()
     {
-        return $"{id,-10} | {nome,-20} | {nomeResponsavel,-30} | {telefone,-15}\n";
+        return $"{id,-10} | {nome,-20} | {nomeResponsavel,-30} | {telefone,-15}";
     }
 }
