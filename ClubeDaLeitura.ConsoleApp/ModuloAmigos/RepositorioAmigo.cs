@@ -3,7 +3,7 @@ namespace ClubeDaLeitura.ModuloAmigos;
 
 public class RepositorioAmigo : RepositorioBase
 {
-	public bool ExisteDuplicado(string Nome, string Telefone)
+	public bool ExisteDuplicado(string nome, string telefone)
 	{
 		EntidadeBase[] registros = SelecionarTodos();
 
@@ -14,7 +14,7 @@ public class RepositorioAmigo : RepositorioBase
 		{
 			if (entidade is Amigo amigo)
 			{
-				if (amigo.nome == Nome && amigo.telefone == Telefone)
+				if (amigo.nome == nome && amigo.telefone == telefone)
 					return true;
 			}
 		}

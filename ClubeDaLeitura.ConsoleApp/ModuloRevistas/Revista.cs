@@ -24,13 +24,13 @@ public class Revista : EntidadeBase
     {
         string erros = "";
 
-        if (string.IsNullOrWhiteSpace(titulo) || titulo.Length < 2 || titulo.Length > 100) // Título (2-100 caracteres)
+        if (string.IsNullOrWhiteSpace(titulo) || titulo.Length < 2 || titulo.Length > 100)
             erros += "O título da revista deve ter entre 2 e 100 caracteres!\n";
 
         if (numeroEdicao <= 0)
             erros += "O número da edição deve ser um valor positivo!\n";
 
-        if (anoPublicacao <= 0 || anoPublicacao > DateTime.Now.Year + 1)
+        if (anoPublicacao < 1800 || anoPublicacao > DateTime.Now.Year + 1)
             erros += $"O ano de publicação deve ser válido (ex: entre 1800 e {DateTime.Now.Year + 1})!\n";
 
         if (caixa == null)

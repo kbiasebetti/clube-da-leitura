@@ -5,10 +5,9 @@ public class TelaAmigo : TelaBase
 {
     private RepositorioAmigo repositorioAmigo;
 
-    public TelaAmigo(RepositorioAmigo repositorio, Notificador notificador) : base("Amigo", repositorio, notificador)
+    public TelaAmigo(RepositorioAmigo repositorioAmigo, Notificador notificador) : base("Amigo", repositorioAmigo, notificador)
     {
-        this.repositorioAmigo = repositorio;
-        this.notificador = notificador;
+        this.repositorioAmigo = repositorioAmigo;
     }
 
     protected override EntidadeBase ObterRegistro()
@@ -19,66 +18,41 @@ public class TelaAmigo : TelaBase
         Console.Write("Digite o nome do responsável: ");
         string nomeResponsavel = Console.ReadLine();
 
-        Console.Write("Digite o telefone ((XX) XXXX-XXXX ou (XX) XXXXX-XXXX): ");
+        Console.Write("Digite o telefone do amigo: ");
         string telefone = Console.ReadLine();
 
-        Amigo amigo = new Amigo(nome, nomeResponsavel, telefone);
-
-        string erros = amigo.Validar();
-
-        if (!string.IsNullOrWhiteSpace(erros))
-        {
-            notificador.ApresentarMensagem(erros, TipoMensagem.Erro);
-            return ObterRegistro();
-        }
-
-        if (repositorioAmigo.ExisteDuplicado(nome, telefone))
-        {
-            notificador.ApresentarMensagem("Já existe um amigo com o mesmo nome e telefone!", TipoMensagem.Erro);
-            return ObterRegistro();
-        }
-
-        return amigo;
+        return new Amigo(nome, nomeResponsavel, telefone);
     }
 
-    public override void Excluir()
+    protected override bool ValidarAntesDeInserir(EntidadeBase entidade)
     {
-        VisualizarTodos(false);
+        Amigo amigo = (Amigo)entidade;
 
-        int idSelecionado;
-
-        while (true)
+        if (repositorioAmigo.ExisteDuplicado(amigo.nome, amigo.telefone))
         {
-            Console.Write($"\nDigite o ID do amigo que deseja excluir: ");
-            string entrada = Console.ReadLine();
-
-            if (int.TryParse(entrada, out idSelecionado))
-                break;
-
-            notificador.ApresentarMensagem("ID inválido, por favor digite um número inteiro.", TipoMensagem.Erro);
+            notificador.ApresentarMensagem("Já existe um amigo com esse nome e telefone.", TipoMensagem.Erro);
+            return false;
         }
 
-        Amigo amigo = (Amigo)repositorioAmigo.SelecionarPorId(idSelecionado);
+        return true;
+    }
+
+    protected override bool PodeExcluir(int id)
+    {
+        Amigo amigo = (Amigo)repositorio.SelecionarPorId(id);
 
         if (amigo == null)
         {
-            notificador.ApresentarMensagem("Amigo não encontrado!", TipoMensagem.Erro);
-            return;
+            notificador.ApresentarMensagem("Amigo não encontrado.", TipoMensagem.Erro);
+            return false;
         }
 
         // TODO: Verificar se o amigo possui empréstimos vinculados antes de excluir.
-
-        bool conseguiuExcluir = repositorioAmigo.Excluir(idSelecionado);
-
-        if (conseguiuExcluir)
-            notificador.ApresentarMensagem("Amigo excluído com sucesso!", TipoMensagem.Sucesso);
-        else
-            notificador.ApresentarMensagem("Não foi possível excluir o amigo.", TipoMensagem.Erro);
+        return true;
     }
 }
 
-
-// TODO: Método para visualizar empréstimos do amigo - implementar quando o módulo de empréstimos estiver pronto
+// TODO: Método para visualizar empréstimos do amigo - implementar quando o módulo de empréstimos estiver prontoAdd commentMore actions
 /*
 public void VisualizarEmprestimos()
 {
