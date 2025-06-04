@@ -1,14 +1,13 @@
-﻿using System;
+﻿using ClubeDaLeitura.Compartilhado;
 using ClubeDaLeitura.ModuloAmigos;
-using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloRevistas;
+using ClubeDaLeitura.ModuloCaixas;
+using ClubeDaLeitura.ModuloEmprestimos;
 
-namespace ClubeDaLeitura
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            
-        }
+
     }
 }
