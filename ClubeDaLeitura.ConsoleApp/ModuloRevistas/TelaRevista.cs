@@ -14,6 +14,35 @@ public class TelaRevista : TelaBase
         this.repositorioCaixa = repositorioCaixa;
     }
 
+    public override void Inserir()
+    {
+        Console.Clear();
+        MostrarCabecalho($"Inserindo {nomeEntidade}");
+
+        Revista novaRevista = (Revista)ObterRegistro();
+
+        if (novaRevista == null)
+            return;
+
+        if (!ValidarAntesDeInserir(novaRevista))
+        {
+            Console.WriteLine("Pressione ENTER para tentar novamente...");
+            Console.ReadLine();
+            return;
+        }
+
+        repositorioRevista.Inserir(novaRevista);
+
+        Caixa caixaDaRevista = novaRevista.caixa;
+        caixaDaRevista.AdicionarRevista(novaRevista);
+
+        repositorioCaixa.Editar(caixaDaRevista.id, caixaDaRevista);
+
+        notificador.ApresentarMensagem($"{nomeEntidade} inserida com sucesso!", TipoMensagem.Sucesso);
+        Console.WriteLine("Pressione ENTER para continuar...");
+        Console.ReadLine();
+    }
+
     protected override EntidadeBase ObterRegistro()
     {
         EntidadeBase[] caixas = repositorioCaixa.SelecionarTodos();

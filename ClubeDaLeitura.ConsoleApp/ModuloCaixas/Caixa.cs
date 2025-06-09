@@ -1,81 +1,97 @@
 using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloRevistas;
 using System;
+namespace ClubeDaLeitura.ModuloCaixas;
 
-namespace ClubeDaLeitura.ModuloCaixas
+public class Caixa : EntidadeBase
 {
-    public class Caixa : EntidadeBase
+    public string etiqueta;
+    public string cor;
+    public int diasDeEmprestimo;
+
+    public Revista[] revistas = new Revista[0];
+
+    public Caixa(string etiqueta, string cor, int diasDeEmprestimo)
     {
-        public string etiqueta;
-        public string cor;
-        public int diasDeEmprestimo;
-        // TODO: Quando o módulo Revista for implementado, esta seção será usada.
-        // Deverá ser uma coleção baseada em array, conforme restrições do projeto.
-        // Exemplo: private Revista[] revistasNaCaixa;
-        // private int contadorRevistas;
+        this.etiqueta = etiqueta;
+        this.cor = cor;
+        this.diasDeEmprestimo = diasDeEmprestimo;
+    }
 
-        public Caixa(string etiqueta, string cor, int diasDeEmprestimo)
+    public void AdicionarRevista(Revista revista)
+    {
+        Revista[] novoArray = new Revista[revistas.Length + 1];
+
+        for (int i = 0; i < revistas.Length; i++)
         {
-            this.etiqueta = etiqueta;
-            this.cor = cor;
-            this.diasDeEmprestimo = diasDeEmprestimo;
-            // this.revistasNaCaixa = new Revista[CAPACIDADE_MAX_REVISTAS_CAIXA]; // Exemplo
-            // this.contadorRevistas = 0;
+            novoArray[i] = revistas[i];
         }
 
-        public override string Validar()
+        novoArray[novoArray.Length - 1] = revista;
+
+        revistas = novoArray;
+    }
+
+    public void RemoverRevista(Revista revista)
+    {
+        int posicaoEncontrada = -1;
+
+        for (int i = 0; i < revistas.Length; i++)
         {
-            string erros = "";
-
-            if (string.IsNullOrWhiteSpace(etiqueta))
-                erros += "A etiqueta não pode ser vazia!\n";
-            else if (etiqueta.Length > 50)
-                erros += "A etiqueta deve ter no máximo 50 caracteres!\n";
-
-            if (string.IsNullOrWhiteSpace(cor))
-                erros += "A cor não pode ser vazia!\n";
-
-            if (diasDeEmprestimo <= 0)
-                erros += "Os dias de empréstimo devem ser um número positivo!\n";
-
-            return erros;
+            if (revistas[i] != null && revistas[i].id == revista.id)
+            {
+                posicaoEncontrada = i;
+                break;
+            }
         }
 
-        public override void AtualizarRegistro(EntidadeBase registroAtualizado)
-        {
-            Caixa caixaAtualizada = (Caixa)registroAtualizado;
+        if (posicaoEncontrada == -1)
+            return;
 
-            this.etiqueta = caixaAtualizada.etiqueta;
-            this.cor = caixaAtualizada.cor;
-            this.diasDeEmprestimo = caixaAtualizada.diasDeEmprestimo;
+        Revista[] novoArray = new Revista[revistas.Length - 1];
+
+        int contadorNovoArray = 0;
+        for (int i = 0; i < revistas.Length; i++)
+        {
+            if (i != posicaoEncontrada)
+            {
+                novoArray[contadorNovoArray] = revistas[i];
+                contadorNovoArray++;
+            }
         }
 
-        public override string DadosFormatados()
-        {
-            return $"{id,-10} | {etiqueta,-30} | {cor,-20} | {diasDeEmprestimo,-5} dias";
-        }
+        revistas = novoArray;
+    }
 
-        // TODO: Implementar AdicionarRevista() quando o módulo Revista estiver pronto e usando arrays.
-        /*
-        public bool AdicionarRevista(Revista revista)
-        {
-            // Lógica para adicionar revista à caixa
-        }
-        */
+    public override string Validar()
+    {
+        string erros = "";
 
-        // TODO: Implementar RemoverRevista() quando o módulo Revista estiver pronto e usando arrays.
-        /*
-        public bool RemoverRevista(Revista revista)
-        {
-            // Lógica para remover revista da caixa.
-        }
-        */
+        if (string.IsNullOrWhiteSpace(etiqueta))
+            erros += "A etiqueta não pode ser vazia!\n";
+        else if (etiqueta.Length > 50)
+            erros += "A etiqueta deve ter no máximo 50 caracteres!\n";
 
-        // TODO: Implementar método para verificar se a caixa tem revistas vinculadas.
-        /*
-        public bool TemRevistasVinculadas()
-        {
-            // return contadorRevistas > 0; // Exemplo
-        }
-        */
+        if (string.IsNullOrWhiteSpace(cor))
+            erros += "A cor não pode ser vazia!\n";
+
+        if (diasDeEmprestimo <= 0)
+            erros += "Os dias de empréstimo devem ser um número positivo!\n";
+
+        return erros;
+    }
+
+    public override void AtualizarRegistro(EntidadeBase registroAtualizado)
+    {
+        Caixa caixaAtualizada = (Caixa)registroAtualizado;
+
+        this.etiqueta = caixaAtualizada.etiqueta;
+        this.cor = caixaAtualizada.cor;
+        this.diasDeEmprestimo = caixaAtualizada.diasDeEmprestimo;
+    }
+
+    public override string DadosFormatados()
+    {
+        return $"{id,-10} | {etiqueta,-30} | {cor,-20} | {diasDeEmprestimo,-5} dias";
     }
 }
