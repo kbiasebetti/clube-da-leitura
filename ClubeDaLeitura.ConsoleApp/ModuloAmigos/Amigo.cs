@@ -1,4 +1,5 @@
 using ClubeDaLeitura.Compartilhado;
+using ClubeDaLeitura.ModuloEmprestimos;
 namespace ClubeDaLeitura.ModuloAmigos;
 
 public class Amigo : EntidadeBase
@@ -7,11 +8,40 @@ public class Amigo : EntidadeBase
     public string nomeResponsavel;
     public string telefone;
 
+    private Emprestimo[] emprestimos = new Emprestimo[100];
+    private int quantidadeEmprestimos;
+
     public Amigo(string nome, string nomeResponsavel, string telefone)
     {
         this.nome = nome;
         this.nomeResponsavel = nomeResponsavel;
         this.telefone = telefone;
+    }
+
+    public void RegistrarEmprestimo(Emprestimo emprestimo)
+    {
+        if (quantidadeEmprestimos < emprestimos.Length)
+        {
+            emprestimos[quantidadeEmprestimos] = emprestimo;
+            quantidadeEmprestimos++;
+        }
+    }
+
+    public Emprestimo[] ObterEmprestimos(Emprestimo[] todosEmprestimos)
+    {
+        Emprestimo[] emprestimosDoAmigo = new Emprestimo[todosEmprestimos.Length];
+        int index = 0;
+
+        for (int i = 0; i < todosEmprestimos.Length; i++)
+        {
+            if (todosEmprestimos[i] != null && todosEmprestimos[i].amigo.id == this.id)
+            {
+                emprestimosDoAmigo[index] = todosEmprestimos[i];
+                index++;
+            }
+        }
+
+        return emprestimosDoAmigo;
     }
 
 
@@ -41,8 +71,6 @@ public class Amigo : EntidadeBase
         this.nomeResponsavel = amigoAtualizado.nomeResponsavel;
         this.telefone = amigoAtualizado.telefone;
     }
-
-    // TODO: Implementar ObterEmprestimos() na hora de integrar com emprestimos
 
     public override string DadosFormatados()
     {

@@ -2,7 +2,7 @@ namespace ClubeDaLeitura.Compartilhado;
 
 public abstract class TelaBase
 {
-    protected string nomeEntidade;
+    public string nomeEntidade;
     protected RepositorioBase repositorio;
     protected Notificador notificador;
 
