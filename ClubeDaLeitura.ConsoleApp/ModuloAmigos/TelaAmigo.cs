@@ -94,7 +94,7 @@ namespace ClubeDaLeitura.ModuloAmigos
 
             if (emprestimosDoAmigo.Length == 0)
             {
-                notificador.ApresentarMensagem("Este amigo não possui empréstimos!", TipoMensagem.Sucesso);
+                notificador.ApresentarMensagem("Este amigo não possui empréstimos!", TipoMensagem.Erro);
                 Console.WriteLine("\nPressione ENTER para continuar...");
                 Console.ReadLine();
                 return;
