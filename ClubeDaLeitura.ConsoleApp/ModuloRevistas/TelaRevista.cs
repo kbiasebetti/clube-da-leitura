@@ -165,7 +165,7 @@ public class TelaRevista : TelaBase
             Console.Clear();
             MostrarCabecalho("Visualizando Revistas");
             Console.WriteLine($"{"ID",-5} | {"Título",-30} | {"Edição",-6} | {"Ano",-6} | {"Caixa",-15} | {"Status"}");
-            Console.WriteLine(new string('-', 80));
+            Console.WriteLine(new string('-', 95));
         }
 
         EntidadeBase[] revistas = repositorioRevista.SelecionarTodos();
@@ -200,7 +200,7 @@ public class TelaRevista : TelaBase
         EntidadeBase[] caixas = repositorioCaixa.SelecionarTodos();
 
         Console.WriteLine($"{"ID",-5} | {"Etiqueta",-30} | {"Cor",-20} | {"Dias Empréstimo"}");
-        Console.WriteLine(new string('-', 70));
+        Console.WriteLine(new string('-', 75));
 
         foreach (EntidadeBase entidade in caixas)
         {

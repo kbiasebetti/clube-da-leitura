@@ -52,7 +52,7 @@ public class Revista : EntidadeBase
 
     public override string DadosFormatados()
     {
-        return $"{id,-5} | {titulo,-30} | Ed. {numeroEdicao,-5} | Ano: {anoPublicacao,-5} | Caixa: {caixa.etiqueta,-15} | Status: {status}";
+            return $"{id,-5} | {titulo,-30} | {numeroEdicao,-10} | {anoPublicacao,-10} | {caixa.etiqueta,-20} | {status}";
     }
 
     public void Emprestar()

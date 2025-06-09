@@ -92,6 +92,6 @@ public class Caixa : EntidadeBase
 
     public override string DadosFormatados()
     {
-        return $"{id,-10} | {etiqueta,-30} | {cor,-20} | {diasDeEmprestimo,-5} dias";
+        return $"{id,-5} | {etiqueta,-30} | {cor,-20} | {diasDeEmprestimo,-5} dias";
     }
 }

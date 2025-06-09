@@ -25,7 +25,7 @@ namespace ClubeDaLeitura.ModuloAmigos
             Console.Write("Digite o nome do responsável: ");
             string nomeResponsavel = Console.ReadLine();
 
-            Console.Write("Digite o telefone do amigo: ");
+            Console.Write("Digite o telefone do amigo ((XX) XXXX-XXXX ou (XX) XXXXX-XXXX): ");
             string telefone = Console.ReadLine();
 
             return new Amigo(nome, nomeResponsavel, telefone);
